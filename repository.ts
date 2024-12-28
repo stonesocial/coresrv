@@ -3,6 +3,7 @@ import { OrbitDbDriver } from './drivers/orbitdb.driver.js';
 import { requestWrapper } from './utils/request.wrapper.js';
 import { ConfigService } from '@nestjs/config';
 import { IpfsClient } from './drivers/ipfs.client.js';
+import { shuffle } from '../core/utils/shuffler.js';
 
 @Injectable()
 export abstract class Repository {
@@ -38,9 +39,13 @@ export abstract class Repository {
     return await requestWrapper(
       async () => {
         const results: any[] = await this.orbitDbDriver.db.all();
-        if (compareFn) results.sort(compareFn);
+        if (compareFn) {
+          results.sort(compareFn);
 
-        return results;
+          return results;
+        } else {
+          return shuffle(results);
+        }
       }
     );
   }
@@ -64,9 +69,13 @@ export abstract class Repository {
           if (findFn(doc.value)) results.push(doc);
         }
         
-        if (compareFn) results.sort(compareFn)
+        if (compareFn) {
+          results.sort(compareFn)
 
-        return results;
+          return results;
+        } else {
+          return shuffle(results);
+        }
       }
     );
   }
