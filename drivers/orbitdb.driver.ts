@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { createHelia } from 'helia';
-import { createOrbitDB, OrbitDB, Documents } from '@orbitdb/core';
+import { createOrbitDB, Documents } from '@orbitdb/core';
 import { gossipsub } from '@chainsafe/libp2p-gossipsub';
 import { identify } from '@libp2p/identify';
 import { createLibp2p, Libp2pOptions } from 'libp2p';
@@ -10,7 +10,7 @@ import { requestWrapper } from '../utils/request.wrapper.js';
 @Injectable()
 export class OrbitDbDriver implements OnModuleInit, OnModuleDestroy {
   private ipfs: any;
-  private orbitdb: OrbitDB;
+  private orbitdb: any;
   private libp2p: any;
   public db: any;
 

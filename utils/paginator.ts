@@ -1,7 +1,7 @@
 import { QueryModel } from "../query.model";
 
 export function paginator(docs: any, query?: QueryModel) : any[] {
-    if (query.page != -1 && query.limit != -1) {
+    if (query && query.page != -1 && query.limit != -1) {
         const start = (query.page - 1) * query.limit;
         const end = start + query.limit;
         
